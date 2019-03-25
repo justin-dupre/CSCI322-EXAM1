@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*****************************************
  * Justin Dupre CSCI 322 Exam
@@ -80,30 +81,54 @@ public class CalcArea extends Activity {
     //calculate the area of a triangle, circle, or ellipse
     public void calcArea(View view) {
 
-        if (shape == 1) { //Triangle
-            num1 = Double.parseDouble(num1ET.getText().toString());
-            num2 = Double.parseDouble(num2ET.getText().toString());
+        Intent calcIntent = new Intent(CalcArea.this, MainActivity.class);
 
-            area = .5 * num1 * num2;
+
+        if (shape == 1) { //Triangle
+            if(num1ET.getText().toString().matches("") || num2ET.getText().toString().matches("")){
+                Toast.makeText(getApplicationContext(),"Please enter all data.", Toast.LENGTH_SHORT).show();
+            }else {
+                num1 = Double.parseDouble(num1ET.getText().toString());
+                num2 = Double.parseDouble(num2ET.getText().toString());
+                area = .5 * num1 * num2;
+                calcIntent.putExtra("area", area);
+                calcIntent.putExtra("shape", shape_str);
+                startActivity(calcIntent);
+            }
+
         }
         else if (shape == 2) { //Circle
-            num1 = Double.parseDouble(num1ET.getText().toString());
-            num2 = 0;
-
-            area = 3.14159 * Math.pow(num1, 2);
+            if(num1ET.getText().toString().matches("") ){
+                Toast.makeText(getApplicationContext(),"Please enter all data.", Toast.LENGTH_SHORT).show();
+            }else {
+                num1 = Double.parseDouble(num1ET.getText().toString());
+                num2 = 0;
+                area = 3.14159 * Math.pow(num1, 2);
+                calcIntent.putExtra("area", area);
+                calcIntent.putExtra("shape", shape_str);
+                startActivity(calcIntent);
+            }
         }
         else if (shape == 3) { //Ellipse
-            num1 = Double.parseDouble(num1ET.getText().toString());
-            num2 = Double.parseDouble(num2ET.getText().toString());
+            if(num1ET.getText().toString().matches("") || num1ET.getText().toString().matches("") ){
+                Toast.makeText(getApplicationContext(),"Please enter all data.", Toast.LENGTH_SHORT).show();
+            }else {
+                num1 = Double.parseDouble(num1ET.getText().toString());
+                num2 = Double.parseDouble(num2ET.getText().toString());
 
-            area = 3.14159 * num1 * num2;
+                area = 3.14159 * num1 * num2;
+
+                calcIntent.putExtra("area", area);
+                calcIntent.putExtra("shape", shape_str);
+                startActivity(calcIntent);
+            }
         }
 
+
+
+
         //create an intent back to main activity, put the area and shape name as extras.
-        Intent calcIntent = new Intent(CalcArea.this, MainActivity.class);
-        calcIntent.putExtra("area", area);
-        calcIntent.putExtra("shape", shape_str);
-        startActivity(calcIntent);
+
     }
 
 }
