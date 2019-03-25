@@ -110,7 +110,7 @@ public class CalcArea extends Activity {
             }
         }
         else if (shape == 3) { //Ellipse
-            if(num1ET.getText().toString().matches("") || num1ET.getText().toString().matches("") ){
+            if(num1ET.getText().toString().matches("") || num2ET.getText().toString().matches("") ){
                 Toast.makeText(getApplicationContext(),"Please enter all data.", Toast.LENGTH_SHORT).show();
             }else {
                 num1 = Double.parseDouble(num1ET.getText().toString());
